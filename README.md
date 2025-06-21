@@ -274,8 +274,6 @@ cd IoT-MQTT-Projects
    - Install the **service**
    - Install **dependencies** (OpenSSL, pthreads, etc.)
 
----
-
 ##### 2. Configure Mosquitto
 
 Open Command Prompt as Administrator and run:
@@ -285,6 +283,14 @@ cd "C:\Program Files\mosquitto"
 copy mosquitto.conf mosquitto.conf.bak
 notepad mosquitto.conf
 ```
+
+##### 3.At the end of the mosquitto.conf file, add:
+```
+listener 1883
+allow_anonymous true
+```
+Save and close the file.
+
 
 #### 3. ESP32 Firmware Setup
 
