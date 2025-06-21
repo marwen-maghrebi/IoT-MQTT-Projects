@@ -1,0 +1,17 @@
+{
+  "name": "mq2",
+  "author": "Marwen Maghrebi",
+  "pins": [
+    "",
+    "",
+    "",
+    "",
+    "D0",
+    "A0",
+    "VCC",
+    "GND"
+  ],
+  "controls": [
+    {"id": "gas", "label": "Gas Concentration % (300-1000ppm)", "type": "range", "min": 0, "max": 100, "step": 1}
+  ]
+}

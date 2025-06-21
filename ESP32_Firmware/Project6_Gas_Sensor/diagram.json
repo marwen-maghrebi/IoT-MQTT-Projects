@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "author": "Marwen Maghrebi",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "chip-mq2", "id": "chip1", "top": 10.62, "left": -146.99, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 73.2,
+      "left": -140.2,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 73.2,
+      "left": -111.4,
+      "attrs": { "color": "yellow" }
+    },
+    { "type": "wokwi-led", "id": "led3", "top": 73.2, "left": -82.6, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 69.6,
+      "left": -238.2,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    
+    [ "led1:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "led2:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "led3:C", "esp:GND.1", "black", [ "v0" ] ],
+    
+    [ "led1:A", "esp:12", "green", [ "v28.8" ] ],
+    [ "led2:A", "esp:14", "gold", [ "v19.2" ] ],
+    [ "led3:A", "esp:27", "red", [ "h-62.21" ] ],
+    
+    [ "chip1:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "chip1:GND", "esp:GND.1", "black", [ "h9.6", "v-19.2", "h-124.8", "v153.6" ] ],
+    [ "chip1:A0", "esp:32", "blue", [ "h23.81", "v9.6", "h0", "v38.4" ] ],
+    
+    [ "bz1:1", "esp:GND.1", "black", [ "v48" ] ],
+    [ "bz1:2", "esp:13", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}

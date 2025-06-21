@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = '.pio/build/esp32doit-devkit-v1/firmware.bin'
+elf = '.pio/build/esp32doit-devkit-v1/firmware.elf'
+
+[[chip]]
+name = 'mq2'  # To use the chip in diagram.json, add a part with "chip-inverter" type.
+binary = 'chips/mq2.chip.wasm'
