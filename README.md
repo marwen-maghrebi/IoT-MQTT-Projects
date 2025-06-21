@@ -124,7 +124,6 @@ IoT-MQTT-Projects/
 **MQTT Topics:**
 - Weather Data: `arduino/Weather`
 - Alerts: `alerts/weather`
-- Thresholds: `arduino/dht22threshold`
 
 ### 3. **Water Level Monitoring & Control System**
 **Hardware:** ESP32 + HC-SR04 + 2 Relays  
@@ -267,19 +266,24 @@ cd IoT-MQTT-Projects
 ```
 
 #### 2. Set Up MQTT Broker
-```bash
-# Install Mosquitto (Ubuntu/Debian)
-sudo apt update
-sudo apt install mosquitto mosquitto-clients
+##### 1. Download and Install Mosquitto
 
-# Configure Mosquitto
-sudo nano /etc/mosquitto/mosquitto.conf
-# Add: listener 1883 0.0.0.0
-#      allow_anonymous true
+1. Visit [https://mosquitto.org/download/](https://mosquitto.org/download/)
+2. Under the **Windows** section, download the `.exe` installer (e.g., `mosquitto-2.x.x-install-windows-x64.exe`)
+3. Run the installer and make sure to:
+   - Install the **service**
+   - Install **dependencies** (OpenSSL, pthreads, etc.)
 
-# Start service
-sudo systemctl start mosquitto
-sudo systemctl enable mosquitto
+---
+
+##### 2. Configure Mosquitto
+
+Open Command Prompt as Administrator and run:
+
+```cmd
+cd "C:\Program Files\mosquitto"
+copy mosquitto.conf mosquitto.conf.bak
+notepad mosquitto.conf
 ```
 
 #### 3. ESP32 Firmware Setup
@@ -309,7 +313,7 @@ pio device monitor
 #### 4. Desktop Application Setup
 ```bash
 # Navigate to dashboard folder
-cd pyqt-dashboard
+cd Qt_GUI_Application
 
 # Install dependencies
 pip install PyQt5>=5.15.0
