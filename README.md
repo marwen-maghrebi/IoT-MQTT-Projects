@@ -307,13 +307,11 @@ Save and close the file.
 pip install platformio
 
 # Navigate to project folder
-cd esp32-projects/1_led_control
+cd ESP32_Firmware/Project1_LED_Button
 
 # Build and upload
 pio run --target upload
 
-# Monitor serial output
-pio device monitor
 ```
 
 #### 4. Desktop Application Setup
@@ -349,9 +347,7 @@ arduino/
 ├── sensor             # Water level data & control
 ├── LoadCell           # Weight measurements
 ├── MPU6050           # Motion sensor data
-├── gas               # Gas detection data
-└── dht22threshold    # Configuration updates
-
+└── gas               # Gas detection data
 mqtt/
 ├── request           # System control commands
 └── response          # Device status responses
@@ -388,18 +384,7 @@ monitor_speed = 115200
 
 ### Common ESP32 Issues
 
-#### 1. WiFi Connection Failed
-```cpp
-// Debug WiFi connection
-Serial.println("WiFi Status: " + String(WiFi.status()));
-Serial.println("Signal Strength: " + String(WiFi.RSSI()) + " dBm");
-```
-**Solutions:**
-- Verify network credentials
-- Check signal strength (minimum -70dBm)
-- Ensure 2.4GHz network compatibility
-
-#### 2. MQTT Connection Issues
+#### 1. MQTT Connection Issues
 ```cpp
 // MQTT diagnostics
 Serial.println("MQTT State: " + String(mqtt.state()));
@@ -410,7 +395,7 @@ Serial.println("Broker IP: " + String(mqtt_server));
 - Check authentication credentials
 - Test with MQTT client tools
 
-#### 3. Sensor Reading Anomalies
+#### 2. Sensor Reading Anomalies
 - **DHT22:** Allow 2-second intervals between readings
 - **HC-SR04:** Ensure 5V power supply
 - **HX711:** Shield from electromagnetic interference
@@ -431,23 +416,5 @@ pip install PyQt5>=5.15.0
 - Check firewall settings
 - Test broker with mosquitto_pub/sub tools
 
-#### 3. Virtual Keyboard Not Working
-- Check input field event filters
-- Verify keyboard widget visibility
-- Restart application if keyboard state corrupted
-
-## 🛡️ Security Features
-
-### ESP32 Security
-- **WiFi Security:** WPA2/WPA3 encryption support
-- **MQTT Authentication:** Username/password protection
-- **Input Validation:** Sanitization of all external commands
-- **Watchdog Timer:** Automatic recovery from system hangs
-
-### Desktop Application Security
-- **Secure Credentials:** Password masking with show/hide toggle
-- **Input Validation:** Sanitization of all user inputs
-- **Thread Safety:** PyQt5 signals/slots for safe UI updates
-- **Connection Validation:** Real-time broker connectivity verification
 
 
