@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "author": "Marwen Maghrebi",
+    "editor": "wokwi",
+    "parts": [
+      { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -28.8, "left": -158.36, "attrs": {} },
+      { "type": "wokwi-mpu6050", "id": "imu1", "top": 80.62, "left": -36.08, "attrs": {} }
+    ],
+    "connections": [
+      [ "esp:TX", "$serialMonitor:RX", "", [] ],
+      [ "esp:RX", "$serialMonitor:TX", "", [] ],
+      [ "imu1:VCC", "esp:3V3", "red", [ "v-115.2", "h-211.12", "v28.8" ] ],
+      [ "imu1:GND", "esp:GND.2", "black", [ "v-86.4", "h0.08" ] ],
+      [ "imu1:SCL", "esp:22", "blue", [ "v0" ] ],
+      [ "imu1:SDA", "esp:21", "blue", [ "v0" ] ]
+    ],
+    "dependencies": {}
+  }
