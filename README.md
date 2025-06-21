@@ -41,51 +41,52 @@ A comprehensive IoT monitoring and control system featuring **6 ESP32-based sens
 
 ```
 IoT-MQTT-Projects/
-├── esp32-projects/                    # Firmware for 6 ESP32 devices
-│   ├── 1_led_control/                # LED/Button system
+├── ESP32_Firmware/                    # Firmware for 6 ESP32 devices
+│   ├── Project1_LED_Button/           # LED/Button system
 │   │   ├── src/
 │   │   │   └── main.cpp              # LED control firmware
 │   │   ├── diagram.json              # Wokwi circuit diagram
 │   │   └── platformio.ini            # PlatformIO configuration
-│   ├── 2_weather/                    # DHT22 sensor
+│   ├── Project2_Temp_Humidity/       # DHT22 sensor
 │   │   ├── src/
 │   │   │   └── main.cpp              # Weather monitoring firmware
 │   │   ├── diagram.json              # Wokwi circuit diagram
 │   │   └── platformio.ini            # PlatformIO configuration
-│   ├── 3_water_level/                # Ultrasonic control
+│   ├── Project3_Water_Level/         # Ultrasonic control
 │   │   ├── src/
 │   │   │   └── main.cpp              # Water level firmware
 │   │   ├── diagram.json              # Wokwi circuit diagram
 │   │   └── platformio.ini            # PlatformIO configuration
-│   ├── 4_load_cell/                  # HX711 weight system
+│   ├── Project4_Load_Cell/           # HX711 weight system
 │   │   ├── src/
 │   │   │   └── main.cpp              # Load cell firmware
 │   │   ├── diagram.json              # Wokwi circuit diagram
 │   │   └── platformio.ini            # PlatformIO configuration
-│   ├── 5_motion/                     # MPU6050 motion tracker
+│   ├── Project5_Accelerometer/       # MPU6050 motion tracker
 │   │   ├── src/
 │   │   │   └── main.cpp              # Motion sensing firmware
 │   │   ├── diagram.json              # Wokwi circuit diagram
 │   │   └── platformio.ini            # PlatformIO configuration
-│   └── 6_gas/                        # MQ2 safety system
+│   └── Project6_Gas_Sensor/          # MQ2 safety system
 │       ├── src/
 │       │   └── main.cpp              # Gas detection firmware
 │       ├── diagram.json              # Wokwi circuit diagram
 │       └── platformio.ini            # PlatformIO configuration
 │
-├── pyqt-dashboard/                   # Python Control Center
+├── Qt_GUI_Application/                   # Python Control Center
 │   ├── main.py                       # Application entry point
 │   ├── mainwindow.py                 # UI definition (Qt Designer)
 │   ├── Mqtt.py                       # MQTT client wrapper
 │   ├── data.py                       # Configuration constants
-│   ├── custom_switch.py              # Custom switch widget
+│   ├──custom_switch/                    # Custom_switch Library
+│   │  ├── __init__.py                # Custom switch init
+│   │  └── custom_switch.py           # Custom switch widget
 │   ├── project1.py                   # LED control module
 │   ├── project2.py                   # Weather monitoring module
 │   ├── project3.py                   # Water level module
 │   ├── project4.py                   # Load cell module
 │   ├── project5.py                   # Motion monitoring module
-│   ├── project6.py                   # Gas detection module
-│   └── requirements.txt              # Python dependencies
+│   └── project6.py                   # Gas detection module
 │
 ├── README.md                         # This file
 └── LICENSE                          # MIT License
