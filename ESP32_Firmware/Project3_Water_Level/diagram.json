@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "author": "Marwen Maghrebi",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-breadboard-mini",
+      "id": "bb1",
+      "top": 90.9,
+      "left": -292.7,
+      "rotate": 270,
+      "attrs": {}
+    },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 38.4, "left": -417.56, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic1", "top": -75.3, "left": -320.9, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": 86.6, "left": -105.6, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay2", "top": 163.4, "left": -105.6, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "text1",
+      "top": 105.6,
+      "left": 28.8,
+      "attrs": { "text": "FILL" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text2",
+      "top": 182.4,
+      "left": 28.8,
+      "attrs": { "text": "DRAIN" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:5V", "bb1:9b.f", "red", [ "h-19.05", "v38.4", "h230.4", "v-124.8" ] ],
+    [ "relay1:VCC", "bb1:9b.j", "red", [ "h-19.2", "v48" ] ],
+    [ "relay2:VCC", "bb1:9b.i", "red", [ "h-19.2", "v-28.8" ] ],
+    [ "esp:CMD", "bb1:10b.f", "black", [ "h-19.05", "v0", "h-9.6", "v38.4", "h230.4", "v-86.4" ] ],
+    [ "relay2:GND", "bb1:10b.j", "black", [ "h-28.8", "v-48.4" ] ],
+    [ "relay1:GND", "bb1:10b.i", "black", [ "h-28.8", "v9.2" ] ],
+    [ "esp:16", "bb1:4b.f", "blue", [ "h38.4", "v38.4" ] ],
+    [ "relay2:IN", "bb1:4b.j", "green", [ "h0" ] ],
+    [ "relay1:IN", "bb1:12b.j", "green", [ "h0" ] ],
+    [ "esp:17", "bb1:12b.f", "blue", [ "h38.4", "v-38.4" ] ],
+    [ "esp:22", "bb1:16t.a", "cyan", [ "h0" ] ],
+    [ "esp:23", "bb1:17t.a", "purple", [ "h0" ] ],
+    [ "ultrasonic1:TRIG", "bb1:16t.c", "cyan", [ "v0" ] ],
+    [ "ultrasonic1:ECHO", "bb1:17t.d", "purple", [ "v0" ] ],
+    [ "ultrasonic1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "ultrasonic1:VCC", "esp:3V3", "red", [ "v9.6", "h-182.4", "v38.4" ] ]
+  ],
+  "dependencies": {}
+}
