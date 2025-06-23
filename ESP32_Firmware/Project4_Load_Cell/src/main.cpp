@@ -19,8 +19,8 @@ const char* password = "";
 
 // MQTT server and credentials
 const char* mqtt_server = "192.168.1.21"; // Updated server address
-const char* mqtt_username = "user";       // MQTT username
-const char* mqtt_password = "user";       // MQTT password
+const char* mqtt_username = "demo";       // MQTT username
+const char* mqtt_password = "azerty";       // MQTT password
 const char* mqttTopicRequest = "mqtt/request";
 const char* mqttTopicResponse = "mqtt/response";
 WiFiClient espClient;
