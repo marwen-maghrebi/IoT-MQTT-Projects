@@ -12,8 +12,8 @@ const int BUZZER_PIN = 4;
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
 const char* mqtt_server = "192.168.1.21";
-const char* mqtt_username = "user";
-const char* mqtt_password = "user";
+const char* mqtt_username = "demo";
+const char* mqtt_password = "azerty";
 
 // MQTT Topics
 const char* WEATHER_TOPIC = "arduino/Weather";
