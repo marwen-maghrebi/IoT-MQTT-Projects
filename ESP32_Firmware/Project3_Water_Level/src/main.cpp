@@ -17,8 +17,8 @@ const char* mqttTopicRequest = "mqtt/request";
 const char* mqttTopicResponse = "mqtt/response";
 
 // MQTT Authentication
-const char* mqttUsername = "user";         // MQTT Username
-const char* mqttPassword = "user";         // MQTT Password
+const char* mqttUsername = "demo";         // MQTT Username
+const char* mqttPassword = "azerty";         // MQTT Password
 
 // Hardware pins
 const int relayIn  = 17;  // Fill valve relay
