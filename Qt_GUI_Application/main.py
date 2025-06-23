@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         
         # ResetKeyboard
         self.ResetKeyboard()
-
+        self.ui.Authentification_label.hide()
         # --- MQTT Buttons ---
         self.ui.Connect_Button.clicked.connect(self.Connect)
         self.ui.Disconnect_Button.clicked.connect(self.Disconnect)
@@ -258,14 +258,49 @@ class MainWindow(QMainWindow):
     # ========================
 
     def Connect(self):
+        # Get connection parameters from UI
         mqtt_username = self.ui.user_lineEdit.text()
         mqtt_password = self.ui.password_lineEdit.text()
-        MQTT_BROKER = self.ui.host_lineEdit.text()
+        mqtt_broker = self.ui.host_lineEdit.text()
+        
+        # Validate inputs
+        if not mqtt_broker:
+            self.ui.Authentification_label.setText("Please enter a broker host.")
+            self.ui.Authentification_label.show()
+            return
+        
+        # Attempt connection
+        try:
+            rc = self.mqtt_client.connect_to_broker(mqtt_broker, mqtt_port, mqtt_username, mqtt_password)
+            
+            # Handle connection result
+            if rc == 0:
+                print("Connection successful")
+                self.ui.Authentification_label.hide()
+                self.goToScreenProject()
+            elif rc == 1:
+                self.ui.Authentification_label.setText("Connection refused - incorrect protocol version.")
+                self.ui.Authentification_label.show()
+            elif rc == 5:
+                self.ui.Authentification_label.setText("Connection refused - bad username or password.")
+                self.ui.Authentification_label.show()
+            elif rc == -1:
+                self.ui.Authentification_label.setText("Connection error: could not reach host.")
+                self.ui.Authentification_label.show()
+            else:
+                self.ui.Authentification_label.setText(f"Connection failed with code {rc}")
+                self.ui.Authentification_label.show()
+                
+        except Exception as e:
+            print(f"Connection error: {e}")
+            self.ui.Authentification_label.setText(f"Connection error: {str(e)}")
+            self.ui.Authentification_label.show()
 
-        if self.mqtt_client.connect_to_broker(MQTT_BROKER, MQTT_PORT, mqtt_username, mqtt_password):
-            self.goToScreenProject()
+
 
     def Disconnect(self):
+        """Handle MQTT disconnection"""
+        print("Disconnect")
         self.mqtt_client.disconnect_from_broker()
 
     # ========================

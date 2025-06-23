@@ -17,7 +17,8 @@ class MqttClient(QObject):
     # ========================
     def __init__(self):
         super().__init__()
-        
+        self._connection_result = None           # Store connection result
+
         # --- MQTT Client Setup ---
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
@@ -33,6 +34,7 @@ class MqttClient(QObject):
     def on_connect(self, client, userdata, flags, rc):
         # --- Called upon successful or failed connection ---
         print(f"Connected to MQTT broker with result code {rc}")
+        self._connection_result = rc
         if rc == 0:
             # --- Subscribe to all queued topics ---
             for topic in self._topics_to_subscribe:
@@ -80,15 +82,35 @@ class MqttClient(QObject):
     # ========================
     def connect_to_broker(self, broker, port, username, password):
         # --- Set credentials and connect to broker ---
-        self.client.username_pw_set(username, password)
+        self._connection_result = None
+        
+        # Set username and password if provided
+        if username and password:
+            self.client.username_pw_set(username, password)
+        
         try:
+            # Attempt connection
             self.client.connect(broker, port, 60)
             self.client.loop_start()
-            print("Connected to MQTT broker.")
-            return True
+            
+            # Wait for connection result (with timeout)
+            import time
+            timeout = 10  # 10 seconds timeout
+            start_time = time.time()
+            
+            while self._connection_result is None and (time.time() - start_time) < timeout:
+                time.sleep(0.1)
+            
+            if self._connection_result is None:
+                # Timeout occurred
+                self.client.loop_stop()
+                return -1  # Connection timeout
+            
+            return self._connection_result
+            
         except Exception as e:
             print(f"Failed to connect to MQTT broker: {e}")
-            return False
+            return -1  # General connection error
 
     def disconnect_from_broker(self):
         # --- Gracefully disconnect and stop network loop ---

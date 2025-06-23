@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\mainwindow.ui'
+# Form implementation generated from reading ui file 'mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -141,7 +141,7 @@ class Ui_MainWindow(object):
         self.screen_home = QtWidgets.QWidget()
         self.screen_home.setStyleSheet("\n"
 "QWidget#screen_home {\n"
-"    border-image: url(:/pic/logo/background_main.jpg) 0 0 0 0 stretch stretch;\n"
+"    border-image: url(:/pic/logo/background001.jpg) 0 0 0 0 stretch stretch;\n"
 "    background-position: center;\n"
 "    background-repeat: no-repeat;\n"
 "}")
@@ -379,13 +379,21 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.addWidget(self.frame_11)
         self.horizontalLayout_5.addWidget(self.frame_7)
         self.verticalLayout_14.addWidget(self.frame_connect)
+        self.Authentification_label = QtWidgets.QLabel(self.screen_home)
+        self.Authentification_label.setStyleSheet("font: bold 20px;\n"
+"color :red ; ")
+        self.Authentification_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Authentification_label.setObjectName("Authentification_label")
+        self.verticalLayout_14.addWidget(self.Authentification_label)
         self.frame_keyboard = QtWidgets.QFrame(self.screen_home)
         self.frame_keyboard.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_keyboard.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.frame_keyboard.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_keyboard.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_keyboard.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_keyboard.setObjectName("frame_keyboard")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_keyboard)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.Keyboard = QtWidgets.QGroupBox(self.frame_keyboard)
         self.Keyboard.setMinimumSize(QtCore.QSize(870, 272))
@@ -2876,6 +2884,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_14.addWidget(self.frame_keyboard)
         self.frame_keyboard.raise_()
         self.frame_connect.raise_()
+        self.Authentification_label.raise_()
         self.stackedWidget.addWidget(self.screen_home)
         self.screen_project = QtWidgets.QWidget()
         self.screen_project.setStyleSheet("QWidget#screen_project {\n"
@@ -6372,7 +6381,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -6386,6 +6395,7 @@ class Ui_MainWindow(object):
         self.lab_Host.setText(_translate("MainWindow", "Host"))
         self.lab_User.setText(_translate("MainWindow", "Username"))
         self.lab_Paswrd.setText(_translate("MainWindow", "Password"))
+        self.Authentification_label.setText(_translate("MainWindow", "TextLabel"))
         self.Btn_A.setText(_translate("MainWindow", "A"))
         self.Btn_Z.setText(_translate("MainWindow", "Z"))
         self.Btn_E.setText(_translate("MainWindow", "E"))

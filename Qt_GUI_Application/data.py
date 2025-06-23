@@ -9,16 +9,23 @@ screen_accelo     = 6
 screen_gas_sensor = 7
 
 # MQTT Configuration
-MQTT_PORT = 1883
-MQTT_TOPIC_MQTT_Rq     = "mqtt/request"
-MQTT_TOPIC_MQTT_Rs     = "mqtt/response"
-MQTT_TOPIC_LED      = "arduino/Led"
-MQTT_TOPIC_SENSOR   = "arduino/sensor"
-MQTT_TOPIC_CONTROL  = "arduino/sensor"
-MQTT_TOPIC_WATHER   = "arduino/Weather"
-MQTT_TOPIC_ALERTS   = "alerts/weather"
+mqtt_port = 1883
+MQTT_TOPIC_MQTT_Rq       = "mqtt/request"
+MQTT_TOPIC_MQTT_Rs       = "mqtt/response"
+
+MQTT_TOPIC_LED           = "arduino/Led"
+
+MQTT_TOPIC_WATHER            = "arduino/Weather"
+MQTT_TOPIC_WATHER_ALERTS     = "arduino/weather_alerts"
+MQTT_TOPIC_WATHER_THRESHOLD  = "arduino/Weather_threshold"
+
+MQTT_TOPIC_SENSOR        = "arduino/sensor"
+MQTT_TOPIC_CONTROL       = "arduino/sensor_Control"
+
 MQTT_TOPIC_LOADCELL = "arduino/LoadCell"
+
 MQTT_TOPIC_MPU6050  = "arduino/MPU6050"
+
 MQTT_TOPIC_GAS      = "arduino/gas"
 
 # Keyboard Configuration
