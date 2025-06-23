@@ -12,10 +12,10 @@ const char* password = "";                 // Replace with your Wi-Fi password
 // MQTT Configuration
 const char* mqttServer = "192.168.1.21";   // MQTT Broker IP
 const int mqttPort = 1883;                 // MQTT Broker Port
-const char* mqttTopicSensor = "arduino/sensor"; // MQTT Topic for Sensor Data
 const char* mqttTopicRequest = "mqtt/request";
 const char* mqttTopicResponse = "mqtt/response";
-
+const char* mqttTopicSensor = "arduino/sensor"; // MQTT Topic for Sensor Data
+const char* mqttTopicSensorControl = "arduino/sensor_Control";
 // MQTT Authentication
 const char* mqttUsername = "demo";         // MQTT Username
 const char* mqttPassword = "azerty";         // MQTT Password
@@ -75,7 +75,7 @@ void handleMQTTCallback(char* topic, byte* payload, unsigned int length) {
     } 
     if(systemActive){
       // Handle control commands
-      if (topicStr == mqttTopicSensor) {
+      if (topicStr == mqttTopicSensorControl) {
           if (message == "FILL_ON DRAIN_OFF") {
               Fill();
               Serial.println("Command: Fill ON, Drain OFF");
@@ -117,6 +117,7 @@ void reconnectMQTT() {
         
         if (mqttClient.connect(clientId.c_str(), mqttUsername, mqttPassword)) {
             Serial.println("Connected to MQTT broker");
+            mqttClient.subscribe(mqttTopicSensorControl);
             mqttClient.subscribe(mqttTopicSensor);
             mqttClient.subscribe(mqttTopicRequest);
             mqttClient.publish(mqttTopicResponse, "Board : ESP32 Status : Connected");
