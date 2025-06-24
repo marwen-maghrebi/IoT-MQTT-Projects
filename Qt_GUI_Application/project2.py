@@ -1,7 +1,7 @@
 # ========================
 #         Imports
 # ========================
-from data import MQTT_TOPIC_WATHER, MQTT_TOPIC_ALERTS, MQTT_TOPIC_MQTT_Rq, MQTT_TOPIC_MQTT_Rs
+from data import MQTT_TOPIC_WATHER,MQTT_TOPIC_WATHER_THRESHOLD , MQTT_TOPIC_WATHER_ALERTS, MQTT_TOPIC_MQTT_Rq, MQTT_TOPIC_MQTT_Rs
 from PyQt5.QtCore import QTimer, QObject, pyqtSignal, pyqtSlot
 from datetime import datetime
 import json
@@ -52,9 +52,9 @@ class Tem_hum_Sensor(QObject):
 
     def _setup_mqtt(self):
         """Initialize MQTT subscriptions"""
-        self.mqtt_client.subscribe_to_topic(MQTT_TOPIC_WATHER, self.handle_weather_message)
         self.mqtt_client.subscribe_to_topic(MQTT_TOPIC_MQTT_Rs, self.handle_status_message2)
-        self.mqtt_client.subscribe_to_topic(MQTT_TOPIC_ALERTS, self.handle_alert_message)
+        self.mqtt_client.subscribe_to_topic(MQTT_TOPIC_WATHER, self.handle_weather_message)
+        self.mqtt_client.subscribe_to_topic(MQTT_TOPIC_WATHER_ALERTS, self.handle_alert_message)
 
     def _init_sensor_display(self):
         """Initialize sensor display with default values"""
@@ -245,7 +245,7 @@ class Tem_hum_Sensor(QObject):
         self.mqtt_client.publish(MQTT_TOPIC_MQTT_Rq, "status_request")
         self.status_message.emit(f"[STATUS] Sent status request to {MQTT_TOPIC_MQTT_Rq}")
         
-        QTimer.singleShot(3000, self.check_status_response)
+        QTimer.singleShot(2000, self.check_status_response)
 
     def check_status_response(self):
         """Check if we received a valid response"""
@@ -271,7 +271,7 @@ class Tem_hum_Sensor(QObject):
         }
         self.log_action.emit(f"Thresholds sent: {thresholds}")
         payload = json.dumps(thresholds)
-        self.mqtt_client.publish("arduino/dht22threshold", payload)
+        self.mqtt_client.publish(MQTT_TOPIC_WATHER_THRESHOLD, payload)
     
     # ============================================================================
     # CLEANUP
@@ -284,12 +284,16 @@ class Tem_hum_Sensor(QObject):
         try:
             # Unsubscribe from all relevant MQTT topics
             self.mqtt_client.unsubscribe_from_topic(MQTT_TOPIC_WATHER)
-            self.mqtt_client.unsubscribe_from_topic(MQTT_TOPIC_ALERTS)
+            self.mqtt_client.unsubscribe_from_topic(MQTT_TOPIC_WATHER_ALERTS)
             self.mqtt_client.unsubscribe_from_topic(MQTT_TOPIC_MQTT_Rs)
 
             # Optional: disconnect UI button signals if needed
             self.ui.refrech_btn_SW.clicked.disconnect()
             self.ui.apply_btn.clicked.disconnect()
+
+            # Clear logs
+            self.ui.action_log.clear()
+            self.ui.alert_log.clear()
 
             # Optional: reset display
             self.update_tempC.emit("--")
@@ -302,3 +306,4 @@ class Tem_hum_Sensor(QObject):
 
         except Exception as e:
             print(f"[SENSOR] Error during deactivation: {e}")
+
