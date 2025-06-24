@@ -12,15 +12,15 @@ const int BUZZER_PIN = 4;
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
 const char* mqtt_server = "192.168.1.21";
-const char* mqtt_username = "user";
-const char* mqtt_password = "user";
+const char* mqtt_username = "demo";
+const char* mqtt_password = "azerty";
 
 // MQTT Topics
 const char* WEATHER_TOPIC = "arduino/Weather";
 const char* STATUS_REQUEST_TOPIC = "mqtt/request";
 const char* STATUS_RESPONSE_TOPIC = "mqtt/response";
-const char* THRESHOLD_TOPIC = "arduino/dht22threshold";
-const char* ALERT_TOPIC = "alerts/weather";
+const char* THRESHOLD_TOPIC = "arduino/Weather_threshold";
+const char* ALERT_TOPIC = "arduino/weather_alerts";
 
 // Global variables
 DHTesp dht;
