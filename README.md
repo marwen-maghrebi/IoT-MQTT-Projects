@@ -106,9 +106,10 @@ IoT-MQTT-Projects/
 - Board status reporting
 
 **MQTT Topics:**
-- Control: `arduino/Led`
 - Status: `mqtt/response`
 - Requests: `mqtt/request`
+- Control: `arduino/Led`
+
 
 ### 2. **Weather Monitoring & Alert System**
 **Hardware:** ESP32 + DHT22 + Buzzer  
@@ -122,8 +123,11 @@ IoT-MQTT-Projects/
 - Heat index and dew point calculations
 
 **MQTT Topics:**
+- Status: `mqtt/response`
+- Requests: `mqtt/request`
 - Weather Data: `arduino/Weather`
-- Alerts: `alerts/weather`
+- Alerts: `arduino/weather_alerts`
+- threshold: `arduino/Weather_threshold`
 
 ### 3. **Water Level Monitoring & Control System**
 **Hardware:** ESP32 + HC-SR04 + 2 Relays  
@@ -137,8 +141,10 @@ IoT-MQTT-Projects/
 - Tank geometry compensation
 
 **MQTT Topics:**
+- Status: `mqtt/response`
+- Requests: `mqtt/request`
 - Level Data: `arduino/sensor`
-- Valve Control: `arduino/sensor`
+- Valve Control: `arduino/sensor_Control`
 
 ### 4. **Load Cell Weight Measurement System**
 **Hardware:** ESP32 + HX711 + Load Cell  
@@ -152,6 +158,8 @@ IoT-MQTT-Projects/
 - Tare functionality
 
 **MQTT Topics:**
+- Status: `mqtt/response`
+- Requests: `mqtt/request`
 - Weight Data: `arduino/LoadCell`
 
 ### 5. **Motion & Orientation Monitoring System**
@@ -166,6 +174,8 @@ IoT-MQTT-Projects/
 - Configurable sensor ranges
 
 **MQTT Topics:**
+- Status: `mqtt/response`
+- Requests: `mqtt/request`
 - Motion Data: `arduino/MPU6050`
 
 ### 6. **Gas Detection & Safety Alert System**
@@ -185,6 +195,8 @@ IoT-MQTT-Projects/
 - **Danger (Red LED + Buzzer):** > 900 PPM
 
 **MQTT Topics:**
+- Status: `mqtt/response`
+- Requests: `mqtt/request`
 - Gas Data: `arduino/gas`
 
 ## 🖥️ PyQt5 Desktop Dashboard
@@ -266,16 +278,15 @@ cd IoT-MQTT-Projects
 ```
 
 #### 2. Set Up MQTT Broker
+📺 *You can also follow this video guide:* [Set Up Mosquitto MQTT on Windows](https://youtu.be/hyJhKWhxAxA?si=_qVtR59dgmXFbdNU)
 ##### 1. Download and Install Mosquitto
-
 1. Visit [https://mosquitto.org/download/](https://mosquitto.org/download/)
-2. Under the **Windows** section, download the `.exe` installer (e.g., `mosquitto-2.x.x-install-windows-x64.exe`)
+2. Under the **Windows** section, download the `.exe` installer (e.g., `mosquitto-2.0.15-install-windows-x64`)
 3. Run the installer and make sure to:
    - Install the **service**
    - Install **dependencies** (OpenSSL, pthreads, etc.)
 
 ##### 2. Configure Mosquitto
-
 Open Command Prompt as Administrator and run:
 
 ```cmd
@@ -286,11 +297,10 @@ notepad mosquitto.conf
 
 ##### 3.At the end of the mosquitto.conf file, add:
 ```
-listener 1883
-allow_anonymous true
+listener 1883 0.0.0.0 
+allow_anonymous false
+password_file C:\Program Files\mosquitto\passwd
 ```
-Save and close the file.
-
 
 #### 3. ESP32 Firmware Setup
 
@@ -322,6 +332,7 @@ cd Qt_GUI_Application
 # Install dependencies
 pip install PyQt5>=5.15.0
 pip install paho-mqtt>=1.6.0
+pip install pyqtgraph
 
 # Run application
 python main.py
@@ -333,51 +344,8 @@ Update network settings in ESP32 firmware:
 const char* ssid = "your_wifi_network";
 const char* password = "your_wifi_password";
 const char* mqtt_server = "192.168.1.21";  // Your MQTT broker IP
-const char* mqtt_username = "user";
-const char* mqtt_password = "user";
-```
-
-## 🔧 MQTT Communication Protocol
-
-### Topic Structure
-```
-arduino/
-├── Led                 # LED control commands
-├── Weather            # Environmental data
-├── sensor             # Water level data & control
-├── LoadCell           # Weight measurements
-├── MPU6050           # Motion sensor data
-└── gas               # Gas detection data
-mqtt/
-├── request           # System control commands
-└── response          # Device status responses
-
-alerts/weather         # Weather alerts
-
-```
-
-## 🛠️ Development Environment
-
-### Wokwi Simulation Benefits
-- **Virtual Prototyping:** Test complete circuits without physical hardware
-- **Real-time Debugging:** Monitor all sensor values and system states
-- **Educational Value:** Perfect for learning ESP32 and IoT development
-
-### PlatformIO Configuration
-Each ESP32 project includes a `platformio.ini` file:
-```ini
-[env:esp32doit-devkit-v1]
-platform = espressif32
-board = esp32doit-devkit-v1
-framework = arduino
-lib_deps = 
-    knolleary/PubSubClient@^2.8
-    beegee-tokyo/DHT sensor library for ESPx@^1.19
-    bblanchon/ArduinoJson@^6.21.3
-    olkal/HX711_ADC@^1.2.10
-    adafruit/Adafruit MPU6050@^2.2.4
-    adafruit/Adafruit Unified Sensor@^1.1.9
-monitor_speed = 115200
+const char* mqtt_username = "demo";
+const char* mqtt_password = "azert";
 ```
 
 ## 🔍 Troubleshooting
@@ -408,13 +376,12 @@ Serial.println("Broker IP: " + String(mqtt_server));
 ```bash
 # Install PyQt5 properly
 pip uninstall PyQt5
-pip install PyQt5>=5.15.0
+pip install PyQt5>=5.15.11
 ```
-
 #### 2. MQTT Connection Failed
 - Verify broker IP in application settings
 - Check firewall settings
 - Test broker with mosquitto_pub/sub tools
 
 
-
+📘 Refer to the official [Mosquitto documentation](https://mosquitto.org/documentation/) for advanced configuration.
