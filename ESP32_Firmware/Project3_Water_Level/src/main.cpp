@@ -120,7 +120,6 @@ void reconnectMQTT() {
             mqttClient.subscribe(mqttTopicSensorControl);
             mqttClient.subscribe(mqttTopicSensor);
             mqttClient.subscribe(mqttTopicRequest);
-            mqttClient.publish(mqttTopicResponse, "Board : ESP32 Status : Connected");
         } else {
             Serial.print("Failed, rc=");
             Serial.print(mqttClient.state());

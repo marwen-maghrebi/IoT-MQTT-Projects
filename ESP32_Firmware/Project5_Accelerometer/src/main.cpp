@@ -83,7 +83,6 @@ void reconnect() {
     if (client.connect(clientId.c_str(), mqtt_username, mqtt_password)) {
       Serial.println("Connected");
       client.subscribe("mqtt/request");  // Add this line to subscribe to status requests
-      client.subscribe ("mqtt/response");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());

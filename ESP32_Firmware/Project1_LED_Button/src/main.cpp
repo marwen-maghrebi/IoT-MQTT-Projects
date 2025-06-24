@@ -121,7 +121,6 @@ void reconnect() {
     Serial.println("Connected");
     client.subscribe("arduino/Led");
     client.subscribe("mqtt/request");  // Add this line to subscribe to status requests
-    client.subscribe ("mqtt/response");
   } else {
     Serial.print("failed, rc=");
     Serial.print(client.state());
